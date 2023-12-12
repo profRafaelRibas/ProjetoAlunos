@@ -1,0 +1,34 @@
+{% extends 'modelo.html' %}
+{% block conteudo %}
+<main class="flex-fill my-5">
+    <div class="container text-center mx-auto">
+        <button type="button" onclick="window.location.href='/cadalunos'" class="btn btn-lg btn-success">Cadastrar</button>
+        <button type="button" onclick="window.location.href='/logout'" class="btn btn-lg btn-danger ms-5">Sair</button>     
+    {% if not(alunos) %}
+        <h1 class="text-danger my-5">Não há alunos cadastrados</h1>
+    {% else %}
+        <ul class="list-group m-3 d-flex flex-row">
+            <div class="row g-3" >
+            {% for aluno in alunos %}
+                <div class="col-12 col-lg-6 mx-auto">
+                    <li class="list-group-item p-3 d-flex align-items-center" style="min-height: 220px;">
+                        <div class="col-3 me-3 mh-100">
+                            <img src="../static/img/alunos/{{aluno['img_alun']}}" class="img-thumbnail w-100">
+                        </div>
+                        <div class="col-9 text-start">
+                            <h4 class="text-danger mb-2">{{aluno['nome_alun']}}</h4>
+                            <h6 class="text-black mb-2 text-wrap text-break">{{aluno['port_alun']}}</h5>
+                            <a href="/editalunos/{{aluno['id_alun']}}"><i class="bi bi-pencil-square fs-3"></i></a>
+                            <a href="/excluir/{{aluno['id_alun'] }}" onclick="return confirm('Você tem certeza de que deseja excluir esse aluno?')"><i class="bi bi-trash3 fs-3 ms-5"></i></a>
+                        </div>
+                    </li>
+                </div>
+            {% endfor %}
+            </div>
+        </ul>
+        {% endif %}
+        
+    </div>
+    
+</main>
+{% endblock %}

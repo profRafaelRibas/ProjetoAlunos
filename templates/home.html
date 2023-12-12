@@ -1,0 +1,27 @@
+{% extends 'modelo.html' %}
+{% block conteudo %}
+  <div class="container py-5">
+    <div class="row g-3">
+      {% if not alunos %}
+        <img src="static/img/semalunos.jpg" alt="" class="img-thumbnail rounded mx-auto d-block mt-5 w-25" />
+        <h1 class="text-center my-5">Não há alunos cadastrados</h1>
+      {% else %}
+        {% for aluno in alunos %}
+          <div class="col-6 col-md-4 col-lg-3 col-xl-2">
+            <div class="card text-center bg-light">
+              <img src="../static/img/alunos/{{ aluno['img_alun'] }}" class="card-img-top" />
+              <div class="card-header" style="min-height: 6rem;">{{ aluno['nome_alun'] }}</div>
+              <div class="card-body">
+                {% if aluno['port_alun']%}
+                <a href="{{ aluno['port_alun'] }}" target="_blank"><button class="btn btn-danger">Portfólio</button></a>
+                {% else %}
+                <button class="btn btn-secondary" disabled>Portfólio</button>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      {% endif %}
+    </div>
+  </div>
+{% endblock %}
